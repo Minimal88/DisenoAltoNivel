@@ -1,0 +1,1 @@
+-l"./Filter_RJcfg.cmd" "./filter_rj.obj" "./Filter_RJcfg_c.obj" "./Filter_RJcfg.obj" -l"libc.a" 
