@@ -9,9 +9,11 @@ int sc_main(int argc, char* argv[])
        
   sca_tdf::sca_signal<double> sig_sine, sig_lpout ;	// The two signals we need
 
-  sine src("sine", 50, 1000);
+  sine src("sine", 90000, 1000000);  //Data rate and frequency in Hz.  f=3kHz
   drain dr("drain");
-  lp_elec lp("lowpass", 160, 100e-6);
+  lp_elec lp("lowpass", 1600, 0.000000001); // R in ohms and C in nano Farads
+  //1.6 kohm y 1nF
+  //Cutoff Frequency
 
   src.out(sig_sine);
   lp.in(sig_sine);
@@ -19,8 +21,8 @@ int sc_main(int argc, char* argv[])
   dr.in(sig_lpout);
    
 
-  sca_util::sca_trace_file* tr = sca_util::sca_create_tabular_trace_file("tr.dat");
-  //sca_util::sca_trace_file* tr = sca_util::sca_create_vcd_trace_file("tr");
+  //sca_util::sca_trace_file* tr = sca_util::sca_create_tabular_trace_file("tr.dat");
+  sca_util::sca_trace_file* tr = sca_util::sca_create_vcd_trace_file("tr.vcd");
   sca_util::sca_trace(tr, sig_sine ,"sine");
   sca_util::sca_trace(tr, sig_lpout ,"lpout");
   
